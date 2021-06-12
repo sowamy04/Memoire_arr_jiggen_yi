@@ -1,8 +1,11 @@
 <p-toolbar styleClass="p-mb-4">
   <ng-template pTemplate="left">
-    <button pButton pRipple label="Nouveau Organe" icon="pi pi-plus" class="p-button-primary p-mr-2"></button>
+    <button pButton pRipple label="Nouveau Organe" icon="pi pi-plus" class="p-button-primary p-mr-2" routerLink="add-organe"></button>
   </ng-template>
 </p-toolbar>
+<div>
+  <router-outlet> </router-outlet>
+</div>
 <p-table [value]="organes" [paginator]="true" [rows]="6">
   <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
@@ -28,7 +31,7 @@
           <td> {{org.email}} </td>
           <td>{{org.ville}}</td>
           <td>
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"></button>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-organe"></button>
             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
           </td>
       </tr>

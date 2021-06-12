@@ -1,3 +1,11 @@
+import { EditOrgComponent } from './super-admin/regions/departements/villes/organes/edit-org/edit-org.component';
+import { AddOrgComponent } from './super-admin/regions/departements/villes/organes/add-org/add-org.component';
+import { EditQuartierComponent } from './super-admin/regions/departements/villes/quartiers/edit-quartier/edit-quartier.component';
+import { AddQuartierComponent } from './super-admin/regions/departements/villes/quartiers/add-quartier/add-quartier.component';
+import { EditVilleComponent } from './super-admin/regions/departements/villes/edit-ville/edit-ville.component';
+import { AddVilleComponent } from './super-admin/regions/departements/villes/add-ville/add-ville.component';
+import { EditDeptComponent } from './super-admin/regions/departements/edit-dept/edit-dept.component';
+import { AddDeptComponent } from './super-admin/regions/departements/add-dept/add-dept.component';
 import { EditRegionComponent } from './super-admin/regions/edit-region/edit-region.component';
 import { AddRegionComponent } from './super-admin/regions/add-region/add-region.component';
 import { AdminsComponent } from './super-admin/users/admins/admins.component';
@@ -32,10 +40,26 @@ const routes: Routes = [
         { path: 'update-region', component: EditRegionComponent }
       ]
     },
-    { path:'depts', component: DepartementsComponent },
-    { path:'villes', component: VillesComponent },
-    { path:'add-ville', component:QuartiersComponent },
-    { path:'organes', component: OrganesComponent },
+    { path:'depts', component: DepartementsComponent, children : [
+        { path: 'add-dept', component: AddDeptComponent},
+        { path: 'update-dept', component: EditDeptComponent }
+      ]
+    },
+    { path:'villes', component: VillesComponent, children : [
+        { path: 'add-ville', component: AddVilleComponent},
+        { path: 'update-ville', component: EditVilleComponent }
+      ]
+    },
+    { path:'quartiers', component:QuartiersComponent, children : [
+        { path: 'add-quartier', component: AddQuartierComponent},
+        { path: 'update-quartier', component: EditQuartierComponent }
+      ]
+    },
+    { path:'organes', component: OrganesComponent, children : [
+        { path: 'add-organe', component: AddOrgComponent},
+        { path: 'update-organe', component: EditOrgComponent }
+      ]
+    },
     { path:'users', component: UsersComponent },
     { path:'profils', component: ProfilsComponent },
     { path:'meritoires', component: MeritoiresComponent },

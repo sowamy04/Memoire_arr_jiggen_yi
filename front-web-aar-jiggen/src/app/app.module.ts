@@ -34,6 +34,14 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { AddRegionComponent } from './super-admin/regions/add-region/add-region.component';
 import { EditRegionComponent } from './super-admin/regions/edit-region/edit-region.component';
+import { AddDeptComponent } from './super-admin/regions/departements/add-dept/add-dept.component';
+import { EditDeptComponent } from './super-admin/regions/departements/edit-dept/edit-dept.component';
+import { AddVilleComponent } from './super-admin/regions/departements/villes/add-ville/add-ville.component';
+import { EditVilleComponent } from './super-admin/regions/departements/villes/edit-ville/edit-ville.component';
+import { AddOrgComponent } from './super-admin/regions/departements/villes/organes/add-org/add-org.component';
+import { EditOrgComponent } from './super-admin/regions/departements/villes/organes/edit-org/edit-org.component';
+import { AddQuartierComponent } from './super-admin/regions/departements/villes/quartiers/add-quartier/add-quartier.component';
+import { EditQuartierComponent } from './super-admin/regions/departements/villes/quartiers/edit-quartier/edit-quartier.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +65,15 @@ import { EditRegionComponent } from './super-admin/regions/edit-region/edit-regi
     AddAdminComponent,
     AdminsComponent,
     AddRegionComponent,
-    EditRegionComponent
+    EditRegionComponent,
+    AddDeptComponent,
+    EditDeptComponent,
+    AddVilleComponent,
+    EditVilleComponent,
+    AddOrgComponent,
+    EditOrgComponent,
+    AddQuartierComponent,
+    EditQuartierComponent
   ],
   imports: [
     BrowserModule,

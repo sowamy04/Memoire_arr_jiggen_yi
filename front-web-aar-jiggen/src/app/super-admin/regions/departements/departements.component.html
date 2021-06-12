@@ -2,10 +2,14 @@
 <div class="card">
   <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
-      <button pButton pRipple label="Nouveau Département" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+      <button pButton pRipple label="Nouveau Département" icon="pi pi-plus" class="p-button-success p-mr-2" routerLink="add-dept"></button>
       <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
     </ng-template>
   </p-toolbar>
+
+  <div>
+    <router-outlet> </router-outlet>
+  </div>
 
     <p-table #dt [value]="departements" [rows]="5" [paginator]="true" [globalFilterFields]="['nomDept']" [filterDelay]="0"
         [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
@@ -38,7 +42,7 @@
                 <td>{{dept.nomDept}}</td>
                 <td> {{ dept.nomRegion }}</td>
                 <td>
-                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProduct(product)"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-dept"></button>
                   <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteProduct(product)"></button>
                 </td>
             </tr>

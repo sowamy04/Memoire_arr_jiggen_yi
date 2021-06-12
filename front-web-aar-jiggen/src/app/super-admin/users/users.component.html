@@ -1,11 +1,16 @@
 <div class="card">
   <h5 class="texte">Liste utilisateurs</h5>
-  <div class="p-mb-3">
-    <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()" styleClass="p-button-text p-button-plain"></p-button>
-    <p-button type="button" icon="pi pi-refresh" (click)="reset()" styleClass="p-button-text p-button-plain"></p-button>
-    <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()" styleClass="p-button-text p-button-plain"></p-button>
-</div>
-  <p-table [value]="users" [paginator]="true" [rows]="5">
+  <p-table #dt [value]="users" [paginator]="true" [rows]="5" [globalFilterFields]="['nom', 'prenom', 'email', 'telephone', 'adresse']"
+  [(selection)]="selectedUsers" [rowHover]="true" dataKey="id" [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <h5 class="p-m-0">Gestion des régions</h5>
+          <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Rechercher..."/>
+          </span>
+      </div>
+  </ng-template>
     <ng-template pTemplate="header">
       <tr class="entete">
         <th> # </th>

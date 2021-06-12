@@ -1,3 +1,5 @@
+import { Location } from '@angular/common';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditRegionComponent implements OnInit {
 
-  constructor() { }
+  regionForm : FormGroup | any
+
+  constructor( private location : Location) { }
 
   ngOnInit(): void {
+    this.regionForm = new FormGroup({
+      nomRegion : new FormControl('', Validators.required)
+    });
+  }
+
+  updateRegion(){
+
+  }
+
+  retour(){
+    this.location.back()
   }
 
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Table } from 'primeng/table';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-users',
@@ -75,9 +76,16 @@ export class UsersComponent implements OnInit {
 
   rows = 5;
 
+  selectedUsers : any
+
+  @ViewChild('dt') dt: Table | any;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  applyFilterGlobal($event: any, stringVal : any) {
+    this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
   next() {
