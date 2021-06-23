@@ -1,3 +1,13 @@
+import { NotFoundComponent } from './not-found/not-found.component';
+import { TokenGuard } from './guard/token.guard';
+import { StatsVillesComponent } from './utilisateur/stats-villes/stats-villes.component';
+import { AddAvisComponent } from './utilisateur/avis-user/add-avis/add-avis.component';
+import { AvisUserComponent } from './utilisateur/avis-user/avis-user.component';
+import { ItineraireUserComponent } from './utilisateur/itineraire-user/itineraire-user.component';
+import { AlerteUserComponent } from './utilisateur/alerte-user/alerte-user.component';
+import { MeritoireUserComponent } from './utilisateur/meritoire-user/meritoire-user.component';
+import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+import { AdminComponent } from './admin/admin.component';
 import { EditOrgComponent } from './super-admin/regions/departements/villes/organes/edit-org/edit-org.component';
 import { AddOrgComponent } from './super-admin/regions/departements/villes/organes/add-org/add-org.component';
 import { EditQuartierComponent } from './super-admin/regions/departements/villes/quartiers/edit-quartier/edit-quartier.component';
@@ -33,11 +43,13 @@ const routes: Routes = [
   { path:'', redirectTo:'connexion', pathMatch:'full'},
   { path:'connexion', component:ConnexionComponent},
   { path:'inscription', component:InscriptionComponent},
-  { path:'super-admin', component:SuperAdminComponent, children:[
+  { path:'super-admin', component:SuperAdminComponent, canActivate :[
+    TokenGuard
+  ] ,children:[
     { path:'add-admin', component:AddAdminComponent },
     { path:'regions', component: RegionsComponent, children : [
         { path: 'add-region', component: AddRegionComponent},
-        { path: 'update-region', component: EditRegionComponent }
+        { path: ':id/update', component: EditRegionComponent }
       ]
     },
     { path:'depts', component: DepartementsComponent, children : [
@@ -70,7 +82,54 @@ const routes: Routes = [
     { path:'infos', component:InfoPersonnelComponent },
     { path: 'admins', component: AdminsComponent }
     ]
-  }
+  },
+  { path: 'admin', component: AdminComponent, canActivate: [
+    TokenGuard
+  ] ,children:[
+    { path:'regions', component: RegionsComponent, children : [
+        { path: 'add-region', component: AddRegionComponent},
+        { path: ':id/update', component: EditRegionComponent }
+      ]
+      },
+      { path:'depts', component: DepartementsComponent, children : [
+          { path: 'add-dept', component: AddDeptComponent},
+          { path: 'update-dept', component: EditDeptComponent }
+        ]
+      },
+      { path:'villes', component: VillesComponent, children : [
+          { path: 'add-ville', component: AddVilleComponent},
+          { path: 'update-ville', component: EditVilleComponent }
+        ]
+      },
+      { path:'quartiers', component:QuartiersComponent, children : [
+          { path: 'add-quartier', component: AddQuartierComponent},
+          { path: 'update-quartier', component: EditQuartierComponent }
+        ]
+      },
+      { path:'organes', component: OrganesComponent, children : [
+          { path: 'add-organe', component: AddOrgComponent},
+          { path: 'update-organe', component: EditOrgComponent }
+        ]
+      },
+      { path:'avis', component: AvisComponent },
+      { path:'stats', component: StatisqtiquesComponent },
+      { path:'infos', component:InfoPersonnelComponent },
+    ]
+  },
+  { path:'users', component: UtilisateurComponent, canActivate:[
+    TokenGuard
+    ] ,children : [
+    { path:'meritoires', component:MeritoireUserComponent },
+    { path:'alertes', component: AlerteUserComponent },
+    { path:'itineraires', component: ItineraireUserComponent },
+    { path:'avis', component: AvisUserComponent, children: [
+      { path:'add-avis', component: AddAvisComponent }
+    ] },
+    { path:'stats', component: StatsVillesComponent },
+    { path:'infos', component:InfoPersonnelComponent },
+  ] },
+  { path:'not-found', component:NotFoundComponent },
+  { path:'**', redirectTo:'not-found'}
 ];
 
 @NgModule({

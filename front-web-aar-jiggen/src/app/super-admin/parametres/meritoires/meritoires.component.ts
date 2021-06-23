@@ -1,3 +1,4 @@
+import { MeritoireService } from './../../services/meritoire.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,41 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeritoiresComponent implements OnInit {
 
-  meritoires = [
-    {
-      nomComplet: 'Amy',
-      telephone:"77 777 77 77",
-      date:'15/12/2020',
-      user:'Adja'
-    },
-    {
-      nomComplet: 'Amy',
-      telephone:"77 777 77 77",
-      date:'15/12/2020',
-      user:'Adja'
-    },
-    {
-      nomComplet: 'Amy',
-      telephone:"77 777 77 77",
-      date:'15/12/2020',
-      user:'Adja'
-    },
-    {
-      nomComplet: 'Amy',
-      telephone:"77 777 77 77",
-      date:'15/12/2020',
-      user:'Adja'
-    },
-    {
-      nomComplet: 'Amy',
-      telephone:"77 777 77 77",
-      date:'15/12/2020',
-      user:'Adja'
-    }
-  ];
-  constructor() { }
+  meritoires : any
+  constructor( private meritoireService : MeritoireService ) { }
 
   ngOnInit(): void {
+    this.showItineraire()
+  }
+
+  showItineraire(){
+    this.meritoireService.listePersonne_confiances().subscribe(
+      (resultat : any) => {
+        console.log (resultat)
+        this.meritoires = resultat
+      },
+      error => console.log ('Erreur lors du chargement', error)
+    )
+  }
+
+  transform(image: string){
+    if(image){
+      return "data:image/jpg;base64," + image
+    }
+    return "../../../assets/images/identification.png";
   }
 
 }

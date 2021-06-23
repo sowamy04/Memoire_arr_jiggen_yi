@@ -3,7 +3,7 @@
   <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
       <button pButton pRipple label="Nouvelle ville" icon="pi pi-plus" class="p-button-success p-mr-2" routerLink="add-ville"></button>
-      <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+      <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedVilles()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
     </ng-template>
   </p-toolbar>
 
@@ -41,10 +41,10 @@
                 </td>
                 <td>{{ville.id}}</td>
                 <td>{{ville.nomVille}}</td>
-                <td> {{ ville.nomDept }}</td>
+                <td> {{ ville.departement.nomDept }}</td>
                 <td>
                   <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-ville"></button>
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteProduct(product)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteVille(ville)"></button>
                 </td>
             </tr>
         </ng-template>
@@ -55,30 +55,5 @@
         </ng-template>
     </p-table>
 </div>
-
-<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Ajout Département" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image">
-        <div class="p-field">
-            <label for="name">Nom Département</label>
-            <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
-            <small class="p-error" *ngIf="submitted && !product.name">Le nom du département est requis</small>
-        </div>
-        <div class="p-field">
-          <label for="regionId">Region</label>
-          <p-dropdown  inputId="regionId" [options]="departements" placeholder="Select">
-              <ng-template let-dept pTemplate="item">
-                  <span [class]="dept.value"> {{dept.nomDept}} </span>
-              </ng-template>
-          </p-dropdown>
-      </div>
-    </ng-template>
-
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
-    </ng-template>
-
-</p-dialog>
 
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

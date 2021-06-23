@@ -1,3 +1,4 @@
+import { ItineraireService } from './../../services/itineraire.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,99 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItinerairesComponent implements OnInit {
 
-  itineraires = [
-    {
-      prenom:'ouleye',
-      nom:'sidibé',
-      telephone : "774887764",
-      email :"ouleye@gmail.com",
-      date:'27/01/2021',
-      depart:'thies',
-      destination:'bambey'
-    },
-    {
-      prenom:'ouleye',
-      nom:'sidibé',
-      telephone : "774887764",
-      email :"ouleye@gmail.com",
-      date:'27/01/2021',
-      depart:'thies',
-      destination:'bambey'
-    },
-    {
-      prenom:'ouleye',
-      nom:'sidibé',
-      date:'27/01/2021',
-      depart:'thies',
-      destination:'bambey'
-    },
-    {
-      prenom:'ouleye',
-      nom:'sidibé',
-      telephone : "774887764",
-      email :"ouleye@gmail.com",
-      date:'27/01/2021',
-      depart:'thies',
-      destination:'bambey'
-    },
-    {
-      prenom:'ouleye',
-      nom:'sidibé',
-      telephone : "774887764",
-      email :"ouleye@gmail.com",
-      date:'27/01/2021',
-      depart:'thies',
-      destination:'bambey'
-    },
-    {
-      prenom:'ouleye',
-      nom:'sidibé',
-      telephone : "774887764",
-      email :"ouleye@gmail.com",
-      date:'27/01/2021',
-      depart:'thies',
-      destination:'bambey'
-    },
-    {
-      prenom:'ouleye',
-      nom:'sidibé',
-      telephone : "774887764",
-      email :"ouleye@gmail.com",
-      date:'27/01/2021',
-      depart:'thies',
-      destination:'bambey'
-    },
-    {
-      prenom:'ouleye',
-      nom:'sidibé',
-      telephone : "774887764",
-      email :"ouleye@gmail.com",
-      date:'27/01/2021',
-      depart:'thies',
-      destination:'bambey'
-    },
-    {
-      prenom:'ouleye',
-      nom:'sidibé',
-      telephone : "774887764",
-      email :"ouleye@gmail.com",
-      date:'27/01/2021',
-      depart:'thies',
-      destination:'bambey'
-    },
-    {
-      prenom:'ouleye',
-      nom:'sidibé',
-      telephone : "774887764",
-      email :"ouleye@gmail.com",
-      date:'27/01/2021',
-      depart:'thies',
-      destination:'bambey'
-    }
-  ];
-  constructor() { }
+  itineraires : any
+  constructor( private itineraireService : ItineraireService ) { }
 
   ngOnInit(): void {
+    this.showItineraire()
+  }
+
+  showItineraire(){
+    this.itineraireService.listeItineraires().subscribe(
+      (resultat : any) => {
+        console.log (resultat)
+        this.itineraires = resultat
+      },
+      error => console.log ('Erreur lors du chargement', error)
+    )
   }
 
 }

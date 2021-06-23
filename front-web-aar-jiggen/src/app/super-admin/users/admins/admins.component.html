@@ -1,10 +1,10 @@
 <div class="card">
   <h5 class="texte">Liste des adminitrateurs</h5>
-  <p-table #dt [value]="admins" [paginator]="true" [rows]="5" [globalFilterFields]="['nom', 'prenom', 'email', 'telephone', 'adresse']"
+  <p-table #dt [value]="admins" [paginator]="true" [rows]="7" [globalFilterFields]="['nom', 'prenom', 'email', 'telephone', 'adresse']"
   [(selection)]="selectedUsers" [rowHover]="true" dataKey="id" [showCurrentPageReport]="true">
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
-        <h5 class="p-m-0">Gestion des régions</h5>
+        <h5 class="p-m-0">Gestion des administrateurs</h5>
           <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Rechercher..."/>
@@ -18,20 +18,18 @@
         <th pSortableColumn="nom">Nom <p-sortIcon field="nom"></p-sortIcon></th>
         <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
         <th pSortableColumn="telephone">Téléphone <p-sortIcon field="telephone"></p-sortIcon></th>
-        <th pSortableColumn="adresse">Adresse <p-sortIcon field="adresse"></p-sortIcon></th>
         <th> Action </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-admin>
-      <tr>
-        <td> <img class=" w-25" src="assets/images/identification.png" alt="">  </td>
+      <tr *ngIf="admin.statut == true">
+        <td> <img class=" w-25" src="{{ transform(admin.photo) }}" alt="">  </td>
         <td>{{admin.prenom}}</td>
         <td>{{admin.nom}}</td>
         <td>{{admin.email}}</td>
         <td>{{admin.telephone}}</td>
-        <td>{{admin.adresse}}</td>
         <td>
-          <button pButton pRipple type="button" label="Supprimer" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+          <button (click)="supprimer(admin)" pButton pRipple type="button" label="Supprimer" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
         </td>
       </tr>
     </ng-template>

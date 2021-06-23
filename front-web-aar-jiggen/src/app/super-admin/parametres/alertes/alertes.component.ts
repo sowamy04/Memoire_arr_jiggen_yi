@@ -1,4 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
+import { AlerteService } from '../../services/alerte.service';
 
 @Component({
   selector: 'app-alertes',
@@ -7,47 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlertesComponent implements OnInit {
 
-  alertes = [
-    {
-      id:'1',
-      user:'adja',
-      meritoire:'anta',
-      date:'23/03/2020'
-    },
-    {
-      id:'1',
-      user:'adja',
-      meritoire:'anta',
-      date:'23/03/2020'
-    },
-    {
-      id:'1',
-      user:'adja',
-      meritoire:'anta',
-      date:'23/03/2020'
-    },
-    {
-      id:'1',
-      user:'adja',
-      meritoire:'anta',
-      date:'23/03/2020'
-    },
-    {
-      id:'1',
-      user:'adja',
-      meritoire:'anta',
-      date:'23/03/2020'
-    },
-    {
-      id:'1',
-      user:'adja',
-      meritoire:'anta',
-      date:'23/03/2020'
-    }
-  ]
-  constructor() { }
+  alertes : any
+  constructor( private alerteService : AlerteService ) { }
 
   ngOnInit(): void {
+    this.showAlertes()
+  }
+
+  showAlertes(){
+    this.alerteService.listealertes().subscribe(
+      (resultat : any) =>{
+        console.log(resultat)
+        this.alertes = resultat
+      },
+      (error : any) => console.log ('Erreur lors du chargement', error)
+    )
   }
 
 }

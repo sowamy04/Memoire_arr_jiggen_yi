@@ -3,7 +3,7 @@
   <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
       <button pButton pRipple label="Nouvelle Région" icon="pi pi-plus" class="p-button-success p-mr-2" routerLink="add-region"></button>
-      <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+      <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedRegions()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
     </ng-template>
   </p-toolbar>
 
@@ -29,20 +29,21 @@
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
                 <th> # </th>
-                <th pSortableColumn="nomRegion">Région <p-sortIcon field="nomRegion"></p-sortIcon></th>
+                <th pSortableColumn="nomRegion"> Région <p-sortIcon field="nomRegion"></p-sortIcon></th>
                 <th>Action</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-region>
-            <tr>
+            <tr *ngIf="region.statut == true">
                 <td>
                     <p-tableCheckbox [value]="region"></p-tableCheckbox>
                 </td>
                 <td>{{region.id}}</td>
                 <td>{{region.nomRegion}}</td>
                 <td>
-                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-region"></button>
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteProduct(product)"></button>
+                  <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-primary p-mr-2"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" [routerLink]="[region.id+'/update']"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="supprimer(region)"></button>
                 </td>
             </tr>
         </ng-template>
@@ -53,21 +54,5 @@
         </ng-template>
     </p-table>
 </div>
-
-<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Ajout Région" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image">
-        <div class="p-field">
-            <label for="name">Nom Région</label>
-            <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
-            <small class="p-error" *ngIf="submitted && !product.name">Le nom de la region est requis</small>
-        </div>
-    </ng-template>
-
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
-    </ng-template>
-</p-dialog>
 
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

@@ -16,8 +16,8 @@
   <ng-template pTemplate="body" let-alerte>
       <tr>
           <td>{{alerte.id}}</td>
-          <td> {{alerte.user}}</td>
-          <td>{{alerte.meritoire}}</td>
+          <td> {{alerte.user.prenom}} {{alerte.user.nom}} </td>
+          <td>{{alerte.meritoire.nomComplet}}</td>
           <td> {{alerte.date}} </td>
       </tr>
   </ng-template>

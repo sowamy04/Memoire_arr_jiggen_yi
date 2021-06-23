@@ -50,6 +50,7 @@ class ProfilDataPersister implements ContextAwareDataPersisterInterface
         $users = $data->getUsers();
         foreach($users as $user) {
             $user->setStatut(false);
+            //$this->entityManager->persist($user);
         }
         $this->entityManager->flush();
     }

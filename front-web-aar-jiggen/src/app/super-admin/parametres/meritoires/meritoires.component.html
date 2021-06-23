@@ -20,8 +20,8 @@
           <td>{{meritoire.id}}</td>
           <td> {{meritoire.nomComplet}}</td>
           <td>{{meritoire.telephone}}</td>
-          <td> {{meritoire.user}} </td>
-          <td>{{meritoire.profil}}</td>
+          <td> {{meritoire.simpleUser.prenom}} {{meritoire.simpleUser.nom}} </td>
+          <td> <img class="w-25" src="{{ transform(meritoire.simpleUser.photo)}}" alt=""></td>
           <td> {{meritoire.date}} </td>
       </tr>
   </ng-template>

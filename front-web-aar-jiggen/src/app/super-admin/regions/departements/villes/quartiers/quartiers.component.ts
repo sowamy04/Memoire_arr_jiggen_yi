@@ -1,3 +1,4 @@
+import { QuartierService } from './../../../../services/quartier.service';
 import { Table } from 'primeng/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
@@ -8,70 +9,50 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class QuartiersComponent implements OnInit {
 
-  quartiers : any = [
-      { id: 1, nomQuartier:"dakar", nomVille: "Dakar"},
-      { id : 2, nomQuartier : "sacré coeur", nomVille: "Mermoz Sacré coeur"},
-      {id:"2", nomQuartier:"Gadaye", nomVille: "Guediawaye"},
-      {id:"3", nomQuartier:"Beau maraicher", nomVille: "Pikine"},
-      {id:"4", nomQuartier:"Arafat", nomVille: "Rufisque"}
-];
+  quartiers : any = [];
 
-villes : any
+  villes : any
 
-productDialog : any = false;
+  productDialog : any = false;
 
-product: any;
+  product: any;
 
-selectedProducts: any;
+  selectedProducts: any;
 
-any: any;
+  any: any;
 
-submitted: boolean = false;
+  submitted: boolean = false;
 
-statuses: any;
+  statuses: any;
 
-@ViewChild('dt') dt: Table | any;
-constructor() {
-  this.villes= [
-      {id:"1", nomVille:"Dakar"},
-      {id:"2", nomVille:"Guediawaye"},
-      {id:"3", nomVille:"Pikine"},
-      {id:"4", nomVille:"Rufisque"}
-  ]
-}
+  @ViewChild('dt') dt: Table | any;
+  constructor( private quartierService : QuartierService ) {}
 
-ngOnInit() {
+  ngOnInit() {
+    this.getQuartiers()
+  }
 
-}
+  getQuartiers(){
+    this.quartierService.listequartiers().subscribe(
+      (resultat : any) => {
+        console.log (resultat)
+        this.quartiers = resultat
+      },
+      error => console.log ('Erreur lors du chargement', error)
+    )
+  }
 
-applyFilterGlobal($event: any, stringVal : any) {
+  applyFilterGlobal($event: any, stringVal : any) {
   this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-}
+  }
 
-openNew() {
-    this.submitted = false;
-    this.productDialog = true;
-}
+  deleteSelectedQuartiers() {
 
-deleteSelectedProducts() {
+  }
 
-}
+  deleteQuartier(id: any) {
 
-editProduct(id: any) {
-    this.productDialog = true;
-}
+  }
 
-deleteProduct(id: any) {
-
-}
-
-hideDialog() {
-    this.productDialog = false;
-    this.submitted = false;
-}
-
-saveProduct() {
-
-}
 }
 

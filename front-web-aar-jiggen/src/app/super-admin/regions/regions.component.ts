@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+import { RegionService } from './../services/region.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 
@@ -15,16 +17,7 @@ import { Table } from 'primeng/table';
 })
 export class RegionsComponent implements OnInit {
 
-  regions: any = [
-    { id:"1", nomRegion:"Dakar", departements:[
-      {id:"1", nomDept:"Dakar"},
-      {id:"2", nomDept:"Guediawaye"},
-      {id:"3", nomDept:"Pikine"},
-      {id:"4", nomDept:"Rufisque"}
-    ] },
-    { id:"2", nomRegion: "Thies" },
-    { id:"3", nomRegion: "Diourbel" }
-  ];
+  regions: any
 
   productDialog : any = false;
 
@@ -39,40 +32,57 @@ export class RegionsComponent implements OnInit {
   statuses: any;
 
   @ViewChild('dt') dt: Table | any;
-  constructor() { }
+  constructor( private regionService : RegionService ) { }
 
   ngOnInit() {
+    this.showRegions()
+  }
 
+  showRegions(){
+    this.regionService.listeRegions().subscribe(
+      (resultat : any)=> {
+        console.log(resultat)
+        this.regions = resultat
+      },
+      error => console.log('Erreur lors du chargement!')
+    )
   }
 
   applyFilterGlobal($event: any, stringVal : any) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  openNew() {
-      this.submitted = false;
-      this.productDialog = true;
-  }
-
-  deleteSelectedProducts() {
+  deleteSelectedRegions() {
 
   }
 
-  editProduct(id: any) {
-      this.productDialog = true;
-  }
-
-  deleteProduct(id: any) {
-
-  }
-
-  hideDialog() {
-      this.productDialog = false;
-      this.submitted = false;
-  }
-
-  saveProduct() {
-
+  supprimer(region:any){
+    console.log(region)
+    Swal.fire({
+      title: 'veut-tu vraiment supprimer cette région?',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: `Supprimer`,
+      denyButtonText: `Annuler`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.regionService.supprimerRegion(region.id).subscribe(
+          (result : any)=>{
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Région supprimée avec succès',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            console.log(result)
+          },
+          error=>console.log(error)
+        )
+      } else if (result.isDenied) {
+        Swal.fire('Suppression annulée', '', 'info')
+      }
+    })
   }
 }
 

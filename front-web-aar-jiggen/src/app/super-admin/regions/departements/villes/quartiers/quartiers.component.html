@@ -3,7 +3,7 @@
   <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
       <button pButton pRipple label="Nouveau quartier" icon="pi pi-plus" class="p-button-success p-mr-2" routerLink="add-quartier"></button>
-      <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+      <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedQuartiers()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
     </ng-template>
   </p-toolbar>
 
@@ -41,10 +41,10 @@
                 </td>
                 <td>{{quartier.id}}</td>
                 <td>{{quartier.nomQuartier}}</td>
-                <td> {{ quartier.nomVille }}</td>
+                <td> {{ quartier.villes.nomVille }}</td>
                 <td>
                   <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-quartier"></button>
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteProduct(product)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteQuartier(quartier)"></button>
                 </td>
             </tr>
         </ng-template>

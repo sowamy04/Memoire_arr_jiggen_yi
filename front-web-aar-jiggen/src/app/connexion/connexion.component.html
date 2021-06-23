@@ -7,7 +7,7 @@
         <div> <p class="texte text-black"> Aar Sunu Jiggen Gni, Moy Aar Sunu Askan</p></div>
       </div>
       <div class="login100-form">
-        <h2> AUTHENTIFICATION</h2>
+        <h1 class="mb-3"> AUTHENTIFICATION</h1>
         <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="onLogin()" fxLayoutAlign="stretch" fxLayout="column">
           <mat-form-field class="example-full-width w-100" layout-align="center center">
             <mat-label>Numéro téléphone</mat-label>
@@ -21,7 +21,7 @@
             <mat-error > Le mot de passe est <strong> requis</strong></mat-error>
           </mat-form-field>
           <br>
-          <button routerLink="/super-admin" mat-flat-button class="w-50 bold mb-5 mt-3" style="background-color: blue; color:white">Se connecter</button>
+          <button type="submit" mat-flat-button class="w-50 bold mb-5 mt-3" style="background-color: blue; color:white">Se connecter</button>
           <p>
             <a routerLink="/inscription"> Vous n'avez pas encore de compte? <strong> S'INSCRIRE</strong></a>
           </p>

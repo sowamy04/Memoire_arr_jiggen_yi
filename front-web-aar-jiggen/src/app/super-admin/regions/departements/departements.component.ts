@@ -1,3 +1,5 @@
+import { DeptService } from './../../services/dept.service';
+import { RegionService } from './../../services/region.service';
 import { Table } from 'primeng/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
@@ -15,15 +17,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class DepartementsComponent implements OnInit {
 
-  departements: any = [
-      {id:"1", nomDept:"Dakar", nomRegion: "Dakar", villes :[
-        { id: 1, nomVille:"dakar"},
-        { id : 2, nomVille : "sacré coeur"}
-      ]},
-      {id:"2", nomDept:"Guediawaye", nomRegion: "Dakar"},
-      {id:"3", nomDept:"Pikine", nomRegion: "Dakar"},
-      {id:"4", nomDept:"Rufisque", nomRegion: "Dakar",}
-  ];
+  departements: any
 
   regions : any
 
@@ -40,21 +34,21 @@ export class DepartementsComponent implements OnInit {
   statuses: any;
 
   @ViewChild('dt') dt: Table | any;
-  constructor() {
-    this.regions= [
-      { id:"1", nomRegion:"Dakar", departements:[
-        {id:"1", nomDept:"Dakar"},
-        {id:"2", nomDept:"Guediawaye"},
-        {id:"3", nomDept:"Pikine"},
-        {id:"4", nomDept:"Rufisque"}
-      ] },
-      { id:"2", nomRegion: "Thies" },
-      { id:"3", nomRegion: "Diourbel" }
-    ]
+  constructor( private regionService : RegionService, private deptService : DeptService ) {
   }
 
   ngOnInit() {
+    this.showDepts()
+  }
 
+  showDepts(){
+    this.deptService.listeDept().subscribe(
+      (resultat : any)=>{
+        console.log (resultat)
+        this.departements = resultat
+      },
+      error => console.log('Erreur lors du chargement', error)
+    )
   }
 
   applyFilterGlobal($event: any, stringVal : any) {

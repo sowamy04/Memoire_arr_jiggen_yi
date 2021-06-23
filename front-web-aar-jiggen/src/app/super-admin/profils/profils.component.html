@@ -9,13 +9,14 @@
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-profil let-expanded="expanded">
-          <tr>
+          <tr *ngIf="profil.statut == 1">
               <td>
                   <p-button class="p-button-text p-button-rounded p-button-raised p-button-plain" [pRowToggler]="profil" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"> </p-button>
               </td>
-              <td>{{profil.id}}</td>
-              <td>{{profil.libelle}}</td>
-              <td> <button pButton icon="pi pi-trash" class="p-mt-1 p-mb-1 p-button-rounded p-button-text p-button-danger" label="Supprimer"></button></td>
+              <td> {{profil.id}} </td>
+              <td> {{profil.libelle}} </td>
+              <td (click)="supprimer(profil)" *ngIf="profil.libelle != 'SUPER_ADMIN'"> <button pButton icon="pi pi-trash" class="p-mt-1 p-mb-1 p-button-rounded p-button-text p-button-danger" label="Supprimer"></button></td>
+              <td *ngIf="profil.libelle == 'SUPER_ADMIN'"> <p class="p-mt-1 p-mb-1 p-button-rounded p-button-text p-button-dark"> Impossible de supprimer</p></td>
              </tr>
       </ng-template>
       <ng-template pTemplate="rowexpansion" let-profil>

@@ -1,3 +1,4 @@
+import { OrganesService } from './../../../../services/organes.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,71 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganesComponent implements OnInit {
 
-  organes = [
-    {
-      nom:'marie de dakar',
-      telephone:'338769809',
-      email:'mariedakar@gmail.com',
-      ville:'dakar'
-    },
-    {
-      nom:'marie de dakar',
-      telephone:'338769809',
-      email:'mariedakar@gmail.com',
-      ville:'dakar'
-    },
-    {
-      nom:'marie de dakar',
-      telephone:'338769809',
-      email:'mariedakar@gmail.com',
-      ville:'dakar'
-    },
-    {
-      nom:'marie de dakar',
-      telephone:'338769809',
-      email:'mariedakar@gmail.com',
-      ville:'dakar'
-    },
-    {
-      nom:'marie de dakar',
-      telephone:'338769809',
-      email:'mariedakar@gmail.com',
-      ville:'dakar'
-    },
-    {
-      nom:'marie de dakar',
-      telephone:'338769809',
-      email:'mariedakar@gmail.com',
-      ville:'dakar'
-    },
-    {
-      nom:'marie de dakar',
-      telephone:'338769809',
-      email:'mariedakar@gmail.com',
-      ville:'dakar'
-    },
-    {
-      nom:'marie de dakar',
-      telephone:'338769809',
-      email:'mariedakar@gmail.com',
-      ville:'dakar'
-    },
-    {
-      nom:'marie de dakar',
-      telephone:'338769809',
-      email:'mariedakar@gmail.com',
-      ville:'dakar'
-    },
-    {
-      nom:'marie de dakar',
-      telephone:'338769809',
-      email:'mariedakar@gmail.com',
-      ville:'dakar'
-    }
-  ]
-  constructor() { }
+  organes : any
+  constructor( private organeService : OrganesService ) { }
 
   ngOnInit(): void {
+    this.showOrganes()
+  }
+
+  showOrganes(){
+    this.organeService.listeOrganes().subscribe(
+      (resultat : any) => {
+        console.log (resultat)
+        this.organes = resultat
+      },
+      error => console.log ('Erreur lors du chargement', error)
+    )
   }
 
 }

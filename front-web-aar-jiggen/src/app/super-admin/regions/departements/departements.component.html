@@ -30,6 +30,7 @@
                 </th>
                 <th> # </th>
                 <th pSortableColumn="nomDept">Département <p-sortIcon field="nomDept"></p-sortIcon></th>
+                <th pSortableColumn="nomRegion"> Région <p-sortIcon field="nomRegion"></p-sortIcon> </th>
                 <th>Action</th>
             </tr>
         </ng-template>
@@ -40,7 +41,7 @@
                 </td>
                 <td>{{dept.id}}</td>
                 <td>{{dept.nomDept}}</td>
-                <td> {{ dept.nomRegion }}</td>
+                <td> {{ dept.region.nomRegion }}</td>
                 <td>
                   <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-dept"></button>
                   <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteProduct(product)"></button>
@@ -49,35 +50,10 @@
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
-              Au total il y a {{departements ? departements.length : 0 }} régions.
+              Au total il y a {{departements ? departements.length : 0 }} départements.
             </div>
         </ng-template>
     </p-table>
 </div>
-
-<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Ajout Département" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image">
-        <div class="p-field">
-            <label for="name">Nom Département</label>
-            <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
-            <small class="p-error" *ngIf="submitted && !product.name">Le nom du département est requis</small>
-        </div>
-        <div class="p-field">
-          <label for="regionId">Region</label>
-          <p-dropdown  inputId="regionId" [options]="regions" placeholder="Select">
-              <ng-template let-region pTemplate="item">
-                  <span [class]="region.value"> {{region.nomRegion}} </span>
-              </ng-template>
-          </p-dropdown>
-      </div>
-    </ng-template>
-
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Ajouter" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
-    </ng-template>
-
-</p-dialog>
 
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

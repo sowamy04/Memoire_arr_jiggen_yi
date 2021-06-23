@@ -26,10 +26,10 @@
   <ng-template pTemplate="body" let-org>
       <tr>
           <td>{{org.id}}</td>
-          <td>{{org.nom}}</td>
+          <td>{{org.nomOrgane}}</td>
           <td>{{org.telephone}}</td>
           <td> {{org.email}} </td>
-          <td>{{org.ville}}</td>
+          <td>{{org.ville.nomVille}}</td>
           <td>
             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-organe"></button>
             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>

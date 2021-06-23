@@ -1,3 +1,4 @@
+import { RegionService } from './../../../services/region.service';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -13,15 +14,11 @@ export class AddDeptComponent implements OnInit {
 
   deptForm : FormGroup | any
   region = new FormControl();
-  regions: any[] = [
-    {nomRegion: 'Mary'},
-    {nomRegion: 'Shelley'},
-    {nomRegion: 'Igor'}
-  ];
+  regions: any[] = []
   filteredOptions: Observable<string[]> | any;
 
-  constructor( private location : Location) {
-
+  constructor( private location : Location, private regionService : RegionService) {
+    this.getRegion()
   }
 
   ngOnInit(): void {
@@ -35,6 +32,16 @@ export class AddDeptComponent implements OnInit {
         nomDept : new FormControl('', Validators.required),
         region : new FormControl('', Validators.required)
       });
+  }
+
+  getRegion(){
+    this.regionService.listeRegions().subscribe(
+      (resultat : any)=> {
+        console.log(resultat)
+        this.regions = resultat
+      },
+      error => console.log ( 'Erreur lors du chargement', error )
+    )
   }
 
   displayFn(region: any): string {

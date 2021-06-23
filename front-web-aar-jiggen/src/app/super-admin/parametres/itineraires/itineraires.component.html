@@ -19,11 +19,11 @@
   <ng-template pTemplate="body" let-iti>
       <tr>
           <td>{{iti.id}}</td>
-          <td> {{iti.prenom}} {{iti.nom}}</td>
-          <td>{{iti.telephone}}</td>
-          <td> {{iti.email}} </td>
+          <td> {{iti.user.prenom}} {{iti.user.nom}}</td>
+          <td>{{iti.user.telephone}}</td>
+          <td> {{iti.user.email}} </td>
           <td>{{iti.depart}}</td>
-          <td> {{iti.destination}} </td>
+          <td> {{iti.arrivee}} </td>
           <td> {{iti.date}} </td>
       </tr>
   </ng-template>
