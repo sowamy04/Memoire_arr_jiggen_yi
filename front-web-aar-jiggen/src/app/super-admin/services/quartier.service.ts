@@ -14,15 +14,19 @@ export class QuartierService {
     return this.http.get(this.url+'quartiers')
   }
 
+  ajouterQuartier(quartier : any){
+    return this.http.post(this.url+'villes/quartiers', quartier)
+  }
+
   afficherquartier(id : any){
-    this.http.get(this.url+'villes/quartiers/'+id)
+    return this.http.get(this.url+'villes/quartiers/'+id)
   }
 
   modifierquartier(id : any, dept:any){
-    this.http.put(this.url+'villes/quartiers/'+id, dept)
+    return this.http.put(this.url+'villes/quartiers/'+id, dept)
   }
 
   deletequartier(id: any){
-    this.http.delete(this.url+'villes/quartiers/'+id)
+    return this.http.delete(this.url+'villes/quartiers/'+id)
   }
 }

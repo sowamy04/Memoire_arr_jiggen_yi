@@ -33,10 +33,14 @@
         <td> {{user.telephone}} </td>
         <td> {{user.adresse}} </td>
         <td>
-          <button pButton pRipple type="button" label="Détails" icon="pi pi-list" class="p-button-rounded p-button-primary p-button-text"></button>
-          <button (click)="supprimer(user)" pButton pRipple type="button" label="Supprimer" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+          <button pButton pRipple type="button" icon="pi pi-list" class="p-button-rounded p-button-primary p-button-text" [routerLink]="[user.id+'/detail']"></button>
+          <button (click)="supprimer(user)" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
         </td>
       </tr>
     </ng-template>
   </p-table>
+</div>
+
+<div class="p-mt-6 p-ml-6 p-mr-6">
+  <router-outlet> </router-outlet>
 </div>

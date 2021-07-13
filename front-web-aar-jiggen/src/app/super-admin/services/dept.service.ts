@@ -14,15 +14,19 @@ export class DeptService {
     return this.http.get(this.url+'regions/departements')
   }
 
+  ajouterDept(dept : any){
+    return this.http.post(this.url+'regions/departements', dept)
+  }
+
   afficherDept(id : any){
-    this.http.get(this.url+'regions/departements/'+id)
+    return this.http.get(this.url+'regions/departements/'+id)
   }
 
   modifierDept(id : any, dept:any){
-    this.http.put(this.url+'regions/departements/'+id, dept)
+    return this.http.put(this.url+'regions/departements/'+id, dept)
   }
 
   delete(id: any){
-    this.http.delete(this.url+'regions/departements/'+id)
+    return this.http.delete(this.url+'regions/departements/'+id)
   }
 }

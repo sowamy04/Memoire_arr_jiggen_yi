@@ -11,7 +11,9 @@ export class AvisComponent implements OnInit {
   cols: any[] = [];
   _selectedColumns: any[] = [];
 
-  avis = []
+  avis : any[] = []
+  i : any
+  tab : any[] = []
   constructor( private avisService : AvisService ) { }
 
   ngOnInit(): void {
@@ -33,7 +35,14 @@ export class AvisComponent implements OnInit {
     this.avisService.listeAvis().subscribe(
       (resultat : any) => {
         console.log(resultat)
-        this.avis = resultat
+        this.i = 0
+        for (let index = 0; index < resultat.length; index++) {
+          if (resultat[index].statut == true) {
+            this.tab[this.i] = resultat[index]
+            this.i++
+          }
+        }
+        this.avis = this.tab
       },
       error => console.log('Erreur lors du chargement', error)
     )

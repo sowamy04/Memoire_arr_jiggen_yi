@@ -69,7 +69,7 @@ class Alerte
 
     /**
      * @ORM\ManyToOne(targetEntity=PersonneConfiance::class, inversedBy="alertes")
-     * @Groups({"alerte:read"})
+     * @Groups({"alerte:read", "simple_user:read"})
      */
     private $meritoire;
 

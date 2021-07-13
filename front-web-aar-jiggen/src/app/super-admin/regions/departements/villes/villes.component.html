@@ -34,8 +34,8 @@
                 <th>Action</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-ville>
-            <tr>
+        <ng-template pTemplate="body" let-expanded="expanded" let-ville>
+            <tr *ngIf="ville.statut == true">
                 <td>
                     <p-tableCheckbox [value]="ville"></p-tableCheckbox>
                 </td>
@@ -43,14 +43,69 @@
                 <td>{{ville.nomVille}}</td>
                 <td> {{ ville.departement.nomDept }}</td>
                 <td>
-                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-ville"></button>
+                  <button pButton pRipple [pRowToggler]="ville" class="p-button-rounded p-button-primary p-mr-2" [icon]="expanded ? 'pi pi-list' : 'pi pi-list'"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" [routerLink]="[ville.id+'/update']"></button>
                   <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteVille(ville)"></button>
                 </td>
             </tr>
         </ng-template>
+
+        <ng-template pTemplate="rowexpansion" let-ville>
+          <tr>
+            <td colspan="7">
+              <div class="p-p-3">
+                <p-table class="" [value]="ville.quartiers" [rows]="5" [paginator]="true" datakey="id">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>#</th>
+                      <th>Quartiers</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-quartier>
+                    <tr>
+                      <td>{{quartier.id}}</td>
+                      <td>{{quartier.nomQuartier}}</td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="6">Il n'y a pas encore de quartiers enregistrés pour cette ville. </td>
+                    </tr>
+                </ng-template>
+                </p-table>
+                <br> <br>
+                <p-table class="" [value]="ville.organes" [rows]="5" [paginator]="true" datakey="id">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>#</th>
+                      <th>Nom organe </th>
+                      <th> Téléphone </th>
+                      <th> Email </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-org>
+                    <tr>
+                      <td>{{org.id}}</td>
+                      <td>{{org.nomOrgane}}</td>
+                      <td> {{org.telephone}} </td>
+                      <td> {{org.email}} </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="6">Il n'y a pas encore d'organes pour cette ville. </td>
+                    </tr>
+                </ng-template>
+                </p-table>
+
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
-              Au total il y a {{departements ? departements.length : 0 }} villes.
+              Au total il y a {{villes ? villes.length : 0 }} villes.
             </div>
         </ng-template>
     </p-table>

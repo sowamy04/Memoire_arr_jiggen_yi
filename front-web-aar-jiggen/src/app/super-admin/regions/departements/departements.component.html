@@ -34,8 +34,8 @@
                 <th>Action</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-dept>
-            <tr>
+        <ng-template pTemplate="body" let-dept let-expanded="expanded">
+            <tr *ngIf="dept.statut == true">
                 <td>
                     <p-tableCheckbox [value]="dept"></p-tableCheckbox>
                 </td>
@@ -43,11 +43,41 @@
                 <td>{{dept.nomDept}}</td>
                 <td> {{ dept.region.nomRegion }}</td>
                 <td>
-                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-dept"></button>
-                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteProduct(product)"></button>
+                  <button pButton pRipple [pRowToggler]="dept" class="p-button-rounded p-button-primary p-mr-2" [icon]="expanded ? 'pi pi-list' : 'pi pi-list'"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" [routerLink]="[dept.id+'/update']"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="supprimer(dept)"></button>
                 </td>
             </tr>
         </ng-template>
+
+        <ng-template pTemplate="rowexpansion" let-dept>
+          <tr>
+            <td colspan="7">
+              <div class="p-p-3">
+                <p-table class="" [value]="dept.villes" [rows]="5" [paginator]="true" datakey="id">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>#</th>
+                      <th>Villes</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-ville>
+                    <tr>
+                      <td>{{ville.id}}</td>
+                      <td>{{ville.nomVille}}</td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="6">Il n'y a pas encore de villes enregistrées pour ce département. </td>
+                    </tr>
+                </ng-template>
+                </p-table>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
               Au total il y a {{departements ? departements.length : 0 }} départements.
@@ -55,5 +85,3 @@
         </ng-template>
     </p-table>
 </div>
-
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

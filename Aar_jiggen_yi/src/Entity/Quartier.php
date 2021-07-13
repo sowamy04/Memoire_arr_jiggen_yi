@@ -75,13 +75,13 @@ class Quartier
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"quartier:read", "avis:read", "simple_user:read"})
+     * @Groups({"quartier:read", "avis:read", "simple_user:read", "ville:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"quartier:read", "avis:read", "simple_user:read"})
+     * @Groups({"quartier:read", "avis:read", "simple_user:read", "ville:read"})
      */
     private $nomQuartier;
 

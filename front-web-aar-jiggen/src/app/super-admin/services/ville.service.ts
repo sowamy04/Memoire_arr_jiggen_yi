@@ -15,14 +15,18 @@ export class VilleService {
   }
 
   afficherVille(id : any){
-    this.http.get(this.url+'departements/villes/'+id)
+    return this.http.get(this.url+'departements/villes/'+id)
   }
 
   modifierVille(id : any, dept:any){
-    this.http.put(this.url+'departements/villes/'+id, dept)
+    return this.http.put(this.url+'departements/villes/'+id, dept)
   }
 
   deleteVille(id: any){
-    this.http.delete(this.url+'departements/villes/'+id)
+    return this.http.delete(this.url+'departements/villes/'+id)
+  }
+
+  ajouterVille (ville : any) {
+    return this.http.post(this.url+'departements/villes', ville)
   }
 }

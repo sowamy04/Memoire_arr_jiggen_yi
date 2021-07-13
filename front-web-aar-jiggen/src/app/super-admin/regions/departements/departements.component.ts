@@ -1,7 +1,7 @@
 import { DeptService } from './../../services/dept.service';
-import { RegionService } from './../../services/region.service';
 import { Table } from 'primeng/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-departements',
@@ -18,23 +18,18 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class DepartementsComponent implements OnInit {
 
   departements: any
-
-  regions : any
-
+  depts : any
   productDialog : any = false;
-
   product: any;
-
   selectedProducts: any;
-
   any: any;
-
   submitted: boolean = false;
-
   statuses: any;
+  i : any
+  tab : any[] = []
 
   @ViewChild('dt') dt: Table | any;
-  constructor( private regionService : RegionService, private deptService : DeptService ) {
+  constructor( private deptService : DeptService ) {
   }
 
   ngOnInit() {
@@ -45,39 +40,53 @@ export class DepartementsComponent implements OnInit {
     this.deptService.listeDept().subscribe(
       (resultat : any)=>{
         console.log (resultat)
-        this.departements = resultat
+        this.i = 0
+        for (let index = 0; index < resultat.length; index++) {
+          if (resultat[index].statut == true) {
+            this.tab[this.i] = resultat[index]
+            this.i++
+          }
+        }
+        this.departements = this.tab
       },
-      error => console.log('Erreur lors du chargement', error)
+      (error : any) => console.log('Erreur lors du chargement', error)
     )
+  }
+
+  supprimer(dept:any){
+    console.log(dept)
+    Swal.fire({
+      title: 'veut-tu vraiment supprimer ce département?',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: `Supprimer`,
+      denyButtonText: `Annuler`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deptService.delete(dept.id).subscribe(
+          (result : any)=>{
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Département supprimé avec succès',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            console.log(result)
+          },
+          (error : any) => console.log(error)
+        )
+      } else if (result.isDenied) {
+        Swal.fire('Suppression annulée', '', 'info')
+      }
+    })
   }
 
   applyFilterGlobal($event: any, stringVal : any) {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  openNew() {
-      this.submitted = false;
-      this.productDialog = true;
-  }
-
   deleteSelectedProducts() {
-
-  }
-
-  editProduct(id: any) {
-      this.productDialog = true;
-  }
-
-  deleteProduct(id: any) {
-
-  }
-
-  hideDialog() {
-      this.productDialog = false;
-      this.submitted = false;
-  }
-
-  saveProduct() {
 
   }
 }

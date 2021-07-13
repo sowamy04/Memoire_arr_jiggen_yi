@@ -105,6 +105,7 @@ class Ville
 
     /**
      * @ORM\OneToMany(targetEntity=Quartier::class, mappedBy="villes")
+     * @Groups({"ville:read"})
      */
     private $quartiers;
 

@@ -24,15 +24,15 @@
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-org>
-      <tr>
+      <tr *ngIf="org.statut == true">
           <td>{{org.id}}</td>
           <td>{{org.nomOrgane}}</td>
           <td>{{org.telephone}}</td>
           <td> {{org.email}} </td>
           <td>{{org.ville.nomVille}}</td>
           <td>
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-organe"></button>
-            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
+            <button pButton pRipple icon="pi pi-pencil" type="submit" class="p-button-rounded p-button-success p-mr-2" [routerLink]="[org.id+'/update']"></button>
+            <button pButton pRipple icon="pi pi-trash" type="button" class="p-button-rounded p-button-danger" (click)="supprimer(org)"></button>
           </td>
       </tr>
   </ng-template>

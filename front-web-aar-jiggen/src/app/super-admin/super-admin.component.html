@@ -17,8 +17,8 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
-    <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200"/>
-      <h4 class="name">Admin Super</h4>
+    <img class="avatar mat-elevation-z8" src="{{transform(data.photo)}}"/>
+      <h4 class="name">{{data.prenom}} {{data.nom}}</h4>
       <p class="designation">Super Admin</p>
       <mat-divider></mat-divider>
       <button mat-button class="menu-button" routerLink="profils">

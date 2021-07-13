@@ -35,7 +35,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-quartier>
-            <tr>
+            <tr *ngIf="quartier.statut == true">
                 <td>
                     <p-tableCheckbox [value]="quartier"></p-tableCheckbox>
                 </td>
@@ -43,7 +43,7 @@
                 <td>{{quartier.nomQuartier}}</td>
                 <td> {{ quartier.villes.nomVille }}</td>
                 <td>
-                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" routerLink="update-quartier"></button>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" [routerLink]="[quartier.id+'/update']"></button>
                   <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteQuartier(quartier)"></button>
                 </td>
             </tr>
@@ -55,6 +55,3 @@
         </ng-template>
     </p-table>
 </div>
-
-
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

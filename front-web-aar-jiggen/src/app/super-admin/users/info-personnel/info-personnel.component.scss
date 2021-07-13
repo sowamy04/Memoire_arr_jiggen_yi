@@ -1,5 +1,5 @@
 .contenu{
-  padding: 5%;
+  padding: 1%;
   margin-left: 10%;
   margin-right: 10%;
 }
@@ -13,6 +13,7 @@
 .example-full-width {
   width: 90%;
   margin-left: 5%;
+  margin-bottom: 1.5%;
 }
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
@@ -36,11 +37,8 @@
 }
 
 .image{
-  margin-right: 30%;
   border: 2px solid gray;
   border-radius:50%;
-  width: 30%;
-  height: 20%;
   justify-content: center;
 }
 
@@ -197,6 +195,10 @@
 }
 
 .entete{
-  margin-left: 35%;
   margin-bottom: 5%;
+}
+
+.droiteform{
+  margin-left: 7%;
+  margin-top: 3%;
 }

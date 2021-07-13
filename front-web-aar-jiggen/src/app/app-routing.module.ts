@@ -1,3 +1,4 @@
+import { DetailUserComponent } from './super-admin/users/detail-user/detail-user.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TokenGuard } from './guard/token.guard';
 import { StatsVillesComponent } from './utilisateur/stats-villes/stats-villes.component';
@@ -36,7 +37,7 @@ import { AddAdminComponent } from './super-admin/users/add-admin/add-admin.compo
 import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ConnexionComponent } from './connexion/connexion.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
@@ -54,25 +55,28 @@ const routes: Routes = [
     },
     { path:'depts', component: DepartementsComponent, children : [
         { path: 'add-dept', component: AddDeptComponent},
-        { path: 'update-dept', component: EditDeptComponent }
+        { path: ':id/update', component: EditDeptComponent }
       ]
     },
     { path:'villes', component: VillesComponent, children : [
         { path: 'add-ville', component: AddVilleComponent},
-        { path: 'update-ville', component: EditVilleComponent }
+        { path: ':id/update', component: EditVilleComponent }
       ]
     },
     { path:'quartiers', component:QuartiersComponent, children : [
         { path: 'add-quartier', component: AddQuartierComponent},
-        { path: 'update-quartier', component: EditQuartierComponent }
+        { path: ':id/update', component: EditQuartierComponent }
       ]
     },
     { path:'organes', component: OrganesComponent, children : [
         { path: 'add-organe', component: AddOrgComponent},
-        { path: 'update-organe', component: EditOrgComponent }
+        { path: ':id/update', component: EditOrgComponent }
       ]
     },
-    { path:'users', component: UsersComponent },
+    { path:'users', component: UsersComponent, children :[
+        {path:':id/detail', component: DetailUserComponent}
+      ]
+    },
     { path:'profils', component: ProfilsComponent },
     { path:'meritoires', component: MeritoiresComponent },
     { path:'itineraires', component: ItinerairesComponent },
@@ -93,22 +97,22 @@ const routes: Routes = [
       },
       { path:'depts', component: DepartementsComponent, children : [
           { path: 'add-dept', component: AddDeptComponent},
-          { path: 'update-dept', component: EditDeptComponent }
+          { path: ':id/update', component: EditDeptComponent }
         ]
       },
       { path:'villes', component: VillesComponent, children : [
           { path: 'add-ville', component: AddVilleComponent},
-          { path: 'update-ville', component: EditVilleComponent }
+          { path: ':id/update', component: EditVilleComponent }
         ]
       },
       { path:'quartiers', component:QuartiersComponent, children : [
           { path: 'add-quartier', component: AddQuartierComponent},
-          { path: 'update-quartier', component: EditQuartierComponent }
+          { path: ':id/update', component: EditQuartierComponent }
         ]
       },
       { path:'organes', component: OrganesComponent, children : [
           { path: 'add-organe', component: AddOrgComponent},
-          { path: 'update-organe', component: EditOrgComponent }
+          { path: ':id/update', component: EditOrgComponent }
         ]
       },
       { path:'avis', component: AvisComponent },

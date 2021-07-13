@@ -6,9 +6,9 @@
   </mat-form-field>
   <mat-form-field class="w-25 example-full-width">
     <mat-label>Choisir la région correspondante</mat-label>
-    <input type="text" matInput [formControl]="region" [matAutocomplete]="auto" required>
+    <input type="text" matInput formControlName="region" [matAutocomplete]="auto" required>
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option">
         {{option.nomRegion}}
       </mat-option>
     </mat-autocomplete>
@@ -16,6 +16,6 @@
   </mat-form-field>
   <div>
     <button mat-flat-button class="bouton p-ml-5 mt-3" style="background-color: blue; color:white">Ajouter</button>
-  <button mat-flat-button class="bouton p-ml-5 mt-3" (click)="retour()" style="background-color: red; color:white">Annuler</button>
+  <button mat-flat-button class="bouton p-ml-5 mt-3" type="button" (click)="retour()" style="background-color: red; color:white">Annuler</button>
   </div>
 </form>

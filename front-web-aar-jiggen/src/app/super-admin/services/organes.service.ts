@@ -14,15 +14,19 @@ export class OrganesService {
     return this.http.get(this.url+'organes')
   }
 
-  afficherOrgane(id : any){
-    this.http.get(this.url+'villes/organes/'+id)
+  ajouterOrgane(organe : any){
+    return this.http.post(this.url+'villes/organes', organe)
   }
 
-  modifierOrgane(id : any, dept:any){
-    this.http.put(this.url+'villes/organes/'+id, dept)
+  afficherOrgane(id : any){
+    return this.http.get(this.url+'villes/organes/'+id)
+  }
+
+  modifierOrgane(id : any, org:any){
+    return this.http.put(this.url+'villes/organes/'+id, org)
   }
 
   deleteOrgane(id: any){
-    this.http.delete(this.url+'villes/organes/'+id)
+    return this.http.delete(this.url+'villes/organes/'+id)
   }
 }

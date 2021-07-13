@@ -57,6 +57,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import { DetailUserComponent } from './super-admin/users/detail-user/detail-user.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import {MessageModule} from 'primeng/message';
     AvisUserComponent,
     AddAvisComponent,
     StatsVillesComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DetailUserComponent
   ],
   imports: [
     BrowserModule,

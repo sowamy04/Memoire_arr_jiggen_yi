@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Admin;
 use App\Entity\Profil;
 use App\Entity\SimpleUser;
+use App\Entity\User;
 use App\Repository\AdminRepository;
 use App\Repository\ProfilRepository;
 use App\Repository\SimpleUserRepository;
@@ -33,7 +34,7 @@ class ApiController extends AbstractController
         $this->userService = $userService;
     }
 
-    public function sendMail($mail,  $password){
+    public function sendMail($mail,  $password , $telephone){
         $message = (new \Swift_Message('Aar Jiggen'))
                 ->setFrom('amysow0495@gmail.com')
                 ->setTo($mail)
@@ -41,7 +42,7 @@ class ApiController extends AbstractController
                     $this->renderView(
                         'api/index.html.twig',
                         [
-                            'mail'=> $mail,
+                            'telephone'=> $telephone,
                             'password'=>$password
                         ]
                         ),
@@ -76,7 +77,7 @@ class ApiController extends AbstractController
         $profilTab = $this->getDoctrine()->getRepository(Profil::class)->findAll();
         foreach ($profilTab as $profil) {
             if($profil->getLibelle() == "ADMIN"){
-                $requete = $this->dn->denormalize($requete, Admin::class);
+                $requete = $this->dn->denormalize($requete, User::class);
                 $requete->setFirstConnexion(true)
                         ->setPassword($this->encode->encodePassword($requete, $password))
                         ->setProfil($profil)
@@ -86,7 +87,7 @@ class ApiController extends AbstractController
                 $requete->setPhoto($photo);
                 $em->persist($requete);
                 $em->flush();
-                $this->sendMail($email, $password);
+                $this->sendMail($email, $password, $telephone);
                 return new JsonResponse("Admin ajouté avec succès!");
             }
         } 
@@ -99,36 +100,38 @@ class ApiController extends AbstractController
      * methods={"PUT"},
      * defaults={
      *      "_controller"="\app\ControllerApiController::modifier_admin",
-     *      "_api_resource_class"=Admin::class,
+     *      "_api_resource_class"=User::class,
      *      "_api_collection_operation_name"="put_admin"
      *  }
      * )
      */
-    public function modifier_admin($id, Request $request, AdminRepository $adminRepo)
+    public function modifier_admin($id, Request $request, UserRepository $userRepo)
     {
-        $admin = $adminRepo->findOneBy(["id"=>$id]);
-        $req = $request->getContent();
-        $requete = json_decode($req);
-        $em = $this->getDoctrine()->getManager();
-        $prenom = $requete->prenom;
-        $nom = $requete->nom;
-        $telephone = $requete->telephone;
-        $email = $requete->email;
-        $password = $requete->password;
-        
-        $admin
-            ->setFirstConnexion(false)
-            ->setPassword($this->encode->encodePassword($admin, $password))
-            ->setPrenom($prenom)
-            ->setNom($nom)
-            ->setTelephone($telephone)
-            ->setEmail($email)
-            ->setStatut(true)
+        $requete = $request->request->all();
+        $prenom = $requete['prenom'];
+        $nom = $requete['nom'];
+        $email = $requete['email'];
+        $password = $requete['password'];
+        $telephone = $requete['telephone'];
+        $photo= $request->files->get('photo');
+        if ($photo) {
+            $photo= fopen($photo->getRealPath(),"rb");
+        }
+            
+            $admin = $userRepo->findOneBy(["id"=>$id]);
+            $admin
+                    ->setPrenom($prenom)
+                    ->setNom($nom)
+                    ->setTelephone($telephone)
+                    ->setEmail($email)
+                    ->setStatut(true)
+                    ->setPhoto($photo)
+                    ->setPassword($this->encode->encodePassword($admin, $password));
             ;
 
-        $em->flush();
+            $this->manage->flush();
 
-        return new JsonResponse('Vous avez modifié vos informations avec succès'); 
+        return new JsonResponse('Vous avez modifié vos informations avec succès');
     }
 
     /**
@@ -185,27 +188,31 @@ class ApiController extends AbstractController
      */
     public function modifier_simple_user($id,Request $request, SimpleUserRepository $simpleUserRepo)
     {
-        $simpleUser = $simpleUserRepo->findOneBy(["id"=>$id]);
-        $req = $request->getContent();
-        $requete = json_decode($req);
-        $em = $this->getDoctrine()->getManager();
-        $prenom = $requete->prenom;
-        $nom = $requete->nom;
-        $adresse = $requete->adresse;
-        $sexe = $requete->sexe;
-        $telephone = $requete->telephone;
-        $email = $requete->email;
-        $password = $requete->password;
         
-        $simpleUser
-            ->setAdresse($adresse)
-            ->setSexe($sexe)
-            ->setPassword($this->encode->encodePassword($simpleUser, $password))
-            ->setPrenom($prenom)
-            ->setNom($nom)
-            ->setTelephone($telephone)
-            ->setEmail($email)
-            ->setStatut(true)
+        $em = $this->getDoctrine()->getManager();
+        $requete = $request->request->all();
+        $prenom = $requete['prenom'];
+        $nom = $requete['nom'];
+        $email = $requete['email'];
+        $password = $requete['password'];
+        $telephone = $requete['telephone'];
+        $adresse = $requete['adresse'];
+        $sexe = $requete['sexe'];
+        $photo= $request->files->get('photo');
+        if ($photo) {
+            $photo= fopen($photo->getRealPath(),"rb");
+        }
+            
+            $user = $simpleUserRepo->findOneBy(["id"=>$id]);
+            $user  ->setSexe($sexe)
+                    ->setAdresse($adresse)
+                    ->setPrenom($prenom)
+                    ->setNom($nom)
+                    ->setTelephone($telephone)
+                    ->setEmail($email)
+                    ->setStatut(true)
+                    ->setPhoto($photo)
+                    ->setPassword($this->encode->encodePassword($user, $password));
             ;
 
         $em->flush();

@@ -18,6 +18,14 @@ export class UserService {
     return this.http.delete(this.url+'simple_users/'+id)
   }
 
+  afficherUser(id : any){
+    return this.http.get(this.url+'simple_users/'+id)
+  }
+
+  afficherSuperAdmin(id : any){
+    return this.http.get(this.url+'super_admins/'+id)
+  }
+
 
   /////////////////////////////////////////////////////////////////////
   ///////////////////////////////// Alertes ///////////////////////////

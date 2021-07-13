@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class MeritoiresComponent implements OnInit {
 
   meritoires : any
+  i : any
+  tab : any[] = []
   constructor( private meritoireService : MeritoireService ) { }
 
   ngOnInit(): void {
@@ -19,7 +21,14 @@ export class MeritoiresComponent implements OnInit {
     this.meritoireService.listePersonne_confiances().subscribe(
       (resultat : any) => {
         console.log (resultat)
-        this.meritoires = resultat
+        this.i = 0
+        for (let index = 0; index < resultat.length; index++) {
+          if (resultat[index].statut == true) {
+            this.tab[this.i] = resultat[index]
+            this.i++
+          }
+        }
+        this.meritoires = this.tab
       },
       error => console.log ('Erreur lors du chargement', error)
     )

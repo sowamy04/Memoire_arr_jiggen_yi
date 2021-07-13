@@ -13,7 +13,38 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="profil", type="string")
  * @ORM\DiscriminatorMap({"super_admin"="SuperAdmin", "admin"="Admin", "simple_user"="SimpleUser", "user"="User"})
- * @ApiResource()
+ * @ApiResource(
+ *  attributes={
+ *      "input_formats"={"json"={"application/ld+json", "application/json"}},
+ *      "output_formats"={"json"={"application/ld+json", "application/json"}},
+ *      "deserialize"=false,
+ *        "swagger_context"={
+ *           "consumes"={
+ *              "multipart/form-data",
+ *             },
+ *             "parameters"={
+ *                "in"="formData",
+ *                "name"="file",
+ *                "type"="file",
+ *                "description"="The file to upload",
+ *              },
+*           },
+ *     },
+ * collectionOperations ={
+ * "get"
+ *  },
+ *  itemOperations ={
+ *  "get",
+ * "put_admin" = {
+ *    "method": "PUT",
+ *   "path": "/super_admin/admins/{id}",
+ *   "normalization_context"={"groups":"admin:read"},
+ *   "access_control"="(is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN'))",
+ *   "access_control_message"="Vous n'avez pas access à cette Ressource",
+ *   "route_name" = "update_admin",
+ *   },
+ *  }
+ * )
  */
 class User implements UserInterface
 {
@@ -21,7 +52,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read"})
+     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read", "super_admin:read"})
      */
     private $id;
 
@@ -41,37 +72,37 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read"})
+     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read", "super_admin:read"})
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read"})
+     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read", "super_admin:read"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read"})
+     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read", "super_admin:read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read"})
+     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read", "super_admin:read"})
      */
     private $statut;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read"})
+     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read", "super_admin:read"})
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="blob", nullable=true)
-     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read"})
+     * @Groups({"admin:read", "simple_user:read", "meritoire:read", "itineraire:read", "coordonnees:read", "alerte:read", "avis:read", "profil:read", "super_admin:read"})
      */
     private $photo;
 

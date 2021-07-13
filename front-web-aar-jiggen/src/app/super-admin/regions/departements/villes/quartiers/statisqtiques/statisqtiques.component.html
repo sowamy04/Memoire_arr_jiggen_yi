@@ -21,16 +21,16 @@
   <ng-template pTemplate="body" let-stat>
       <tr>
           <td> {{stat.id}} </td>
-          <td> {{stat.quartier}} </td>
-          <td> {{stat.eclairage}} </td>
+          <td> {{stat.nomQuartier}} </td>
+          <td> {{stat.eclairagePublique}} </td>
           <td> {{stat.vol}} </td>
           <td> {{stat.viol}} </td>
           <td> {{stat.agression}} </td>
-          <td> {{stat.transport}}</td>
-          <td> </td>
+          <td> {{stat.transport}} </td>
+          <td> {{stat.niveau}} </td>
           <td>
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-primary p-mr-2" label="voir schéma"></button>
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-primary p-mr-2" label="alerter"></button>
+            <button pButton pRipple icon="pi pi-chart-bar" class="p-button-rounded p-button-primary p-mr-2"></button>
+            <button pButton pRipple icon="pi pi-exclamation-triangle" class="p-button-rounded p-button-danger p-mr-2"></button>
           </td>
       </tr>
   </ng-template>

@@ -1,3 +1,4 @@
+import { DeptService } from 'src/app/super-admin/services/dept.service';
 import Swal from 'sweetalert2';
 import { RegionService } from './../services/region.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -30,19 +31,38 @@ export class RegionsComponent implements OnInit {
   submitted: boolean = false;
 
   statuses: any;
+  tab : any[] = []
+  i : any
+  hide  = true
 
   @ViewChild('dt') dt: Table | any;
-  constructor( private regionService : RegionService ) { }
+  constructor( private regionService : RegionService, private deptService : DeptService ) { }
 
   ngOnInit() {
     this.showRegions()
+  }
+
+  afficher(){
+    this.hide = false
+  }
+
+  annuler(){
+    this.hide = true
   }
 
   showRegions(){
     this.regionService.listeRegions().subscribe(
       (resultat : any)=> {
         console.log(resultat)
-        this.regions = resultat
+        this.i = 0
+        for (let index = 0; index < resultat.length; index++) {
+          if (resultat[index].statut == true) {
+            this.tab[this.i] = resultat[index]
+            this.i++
+          }
+        }
+        console.log(this.tab.length)
+        this.regions = this.tab
       },
       error => console.log('Erreur lors du chargement!')
     )
@@ -66,7 +86,7 @@ export class RegionsComponent implements OnInit {
       denyButtonText: `Annuler`,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.regionService.supprimerRegion(region.id).subscribe(
+        this.deptService.delete(region.id).subscribe(
           (result : any)=>{
             Swal.fire({
               position: 'center',
