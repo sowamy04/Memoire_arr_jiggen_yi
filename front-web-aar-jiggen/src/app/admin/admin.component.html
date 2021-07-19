@@ -16,20 +16,11 @@
                 <a routerLink="organes" class="btn nav-item nav-link">Organes</a>
                 <a routerLink="avis" class="btn nav-item nav-link">Avis</a>
                 <a routerLink="stats" class="btn nav-item nav-link">Statistiques</a>
-                <div class="dropdown show">
-                  <a class="btn dropdown-toggle" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Paramètres
-                  </a>
-                  <div class="dropdown-menu" style="background-color: #079480;" aria-labelledby="dropdownMenuLink2">
-                    <a routerLink="avis" class="dropdown-item">Avis</a>
-                    <a routerLink="stats" class="dropdown-item">Statistiques</a>
-                  </div>
-                </div>
               </div>
             <div class="gauche">
-              <img class="img-circle img-rounded float-left" src="assets/images/identification.png" style="border-radius: 50%;" height="50" alt="CoolBrand">
+              <img class="img-circle img-rounded float-left" src="{{transform(data.photo)}}" style="border-radius: 50%;" height="50" alt="CoolBrand">
               <a routerLink="infos" class="btn nav-item nav-link" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Amy
+                {{data.prenom}}
               </a>
             </div>
             <a class="btn nav-item nav-link" (click)="deconnexion()">Se déconnecter</a>

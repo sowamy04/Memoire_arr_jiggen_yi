@@ -94,7 +94,7 @@ class PersonneConfiance
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"meritoire:read"})
+     * @Groups({"meritoire:read", "simple_user:read"})
      */
     private $date;
 

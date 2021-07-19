@@ -22,14 +22,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  collectionOperations ={
  *  "get"= {
  *    "normalization_context"={"groups":"avis:read"},
- *    "access_control"="(is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN'))",
+ *    "access_control"="(is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') or is_granted('ROLE_USER'))",
  *    "access_control_message"="Vous n'avez pas access à cette Ressource"
  *   },
  * "lister_avis" = {
  *    "method": "GET",
  *    "path": "simple_users/avis", 
  *    "normalization_context"={"groups":"avis:read"},
- *    "access_control"="(is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN'))",
+ *    "access_control"="(is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') or is_granted('ROLE_USER'))",
  *    "access_control_message"="Vous n'avez pas access à cette Ressource"
  * },
  * "add_avis" = {

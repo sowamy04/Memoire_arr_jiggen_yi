@@ -1,3 +1,6 @@
+import { InfoAdminComponent } from './users/info-admin/info-admin.component';
+import { FirstConnexionComponent } from './users/first-connexion/first-connexion.component';
+import { ChartComponent } from './super-admin/regions/departements/villes/quartiers/statisqtiques/chart/chart.component';
 import { DetailUserComponent } from './super-admin/users/detail-user/detail-user.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TokenGuard } from './guard/token.guard';
@@ -81,12 +84,16 @@ const routes: Routes = [
     { path:'meritoires', component: MeritoiresComponent },
     { path:'itineraires', component: ItinerairesComponent },
     { path:'avis', component: AvisComponent },
-    { path:'stats', component: StatisqtiquesComponent },
+    { path:'stats', component: StatisqtiquesComponent, children : [
+       { path:':id/chart', component: ChartComponent}
+    ] },
     { path:'alertes', component: AlertesComponent },
     { path:'infos', component:InfoPersonnelComponent },
     { path: 'admins', component: AdminsComponent }
     ]
   },
+
+
   { path: 'admin', component: AdminComponent, canActivate: [
     TokenGuard
   ] ,children:[
@@ -116,10 +123,16 @@ const routes: Routes = [
         ]
       },
       { path:'avis', component: AvisComponent },
-      { path:'stats', component: StatisqtiquesComponent },
-      { path:'infos', component:InfoPersonnelComponent },
+      { path:'stats', component: StatisqtiquesComponent, children:[
+        { path:':id/chart', component: ChartComponent}
+      ] },
+      { path:'infos', component:InfoAdminComponent },
     ]
   },
+
+  { path:'first-connexion', component: FirstConnexionComponent },
+
+
   { path:'users', component: UtilisateurComponent, canActivate:[
     TokenGuard
     ] ,children : [
@@ -129,9 +142,12 @@ const routes: Routes = [
     { path:'avis', component: AvisUserComponent, children: [
       { path:'add-avis', component: AddAvisComponent }
     ] },
-    { path:'stats', component: StatsVillesComponent },
+    { path:'stats', component: StatsVillesComponent, children:[
+      { path:':id/chart', component: ChartComponent}
+    ] },
     { path:'infos', component:InfoPersonnelComponent },
   ] },
+
   { path:'not-found', component:NotFoundComponent },
   { path:'**', redirectTo:'not-found'}
 ];

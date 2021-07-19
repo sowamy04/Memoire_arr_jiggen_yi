@@ -46,6 +46,8 @@ import { AvisUserComponent } from './utilisateur/avis-user/avis-user.component';
 import { AddAvisComponent } from './utilisateur/avis-user/add-avis/add-avis.component';
 import { StatsVillesComponent } from './utilisateur/stats-villes/stats-villes.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { DetailUserComponent } from './super-admin/users/detail-user/detail-user.component';
+import { ChartComponent } from './super-admin/regions/departements/villes/quartiers/statisqtiques/chart/chart.component';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -55,9 +57,11 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
-import { DetailUserComponent } from './super-admin/users/detail-user/detail-user.component';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ChartsModule } from 'ng2-charts';
+import { FirstConnexionComponent } from './users/first-connexion/first-connexion.component';
+import { InfoAdminComponent } from './users/info-admin/info-admin.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +103,10 @@ import { DetailUserComponent } from './super-admin/users/detail-user/detail-user
     AddAvisComponent,
     StatsVillesComponent,
     NotFoundComponent,
-    DetailUserComponent
+    DetailUserComponent,
+    ChartComponent,
+    FirstConnexionComponent,
+    InfoAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +125,8 @@ import { DetailUserComponent } from './super-admin/users/detail-user/detail-user
     HttpClientModule,
     JwtModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    ChartsModule
   ],
   providers: [
     GenerationTokenService,

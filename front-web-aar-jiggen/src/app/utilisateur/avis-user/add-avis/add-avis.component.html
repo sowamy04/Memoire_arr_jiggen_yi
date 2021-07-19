@@ -1,9 +1,9 @@
 <form name="avisForm" [formGroup]="avisForm" (ngSubmit)="ajouterAvis()" fxLayoutAlign="stretch" fxLayout="column">
   <mat-form-field class="w-25 p-ml-5 p-mr-5 example-full-width">
     <mat-label>Choisir le quartier </mat-label>
-    <input type="text" matInput [formControl]="quartier" [matAutocomplete]="auto" required>
+    <input type="text" matInput formControlName="quartier" [matAutocomplete]="auto" required>
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option">
         {{option.nomVille}}
       </mat-option>
     </mat-autocomplete>
@@ -55,7 +55,7 @@
   </mat-form-field>
 
   <div class="btn">
-    <button mat-flat-button class="bouton p-ml-5 mt-3" style="background-color: blue; color:white">Ajouter</button>
-    <button mat-flat-button class="bouton p-ml-5 mt-3" (click)="retour()" style="background-color: red; color:white">Annuler</button>
+    <button mat-flat-button class="bouton p-ml-5 mt-3" type="submit" style="background-color: blue; color:white">Ajouter</button>
+    <button mat-flat-button class="bouton p-ml-5 mt-3" type="button" (click)="retour()" style="background-color: red; color:white">Annuler</button>
   </div>
 </form>

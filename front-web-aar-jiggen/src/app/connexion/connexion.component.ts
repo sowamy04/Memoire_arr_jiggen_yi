@@ -38,7 +38,7 @@ export class ConnexionComponent implements OnInit {
             }
             else if (decodedToken.roles == "ROLE_ADMIN"){
               if(decodedToken.firstConnexion == true){
-                this.router.navigateByUrl("/admin/infos")
+                this.router.navigateByUrl("/first-connexion")
               }
               else{
                 this.router.navigateByUrl("/admin/regions")

@@ -1,18 +1,18 @@
-import { AdminService } from './../../services/admin.service';
 import { Location } from '@angular/common';
-import { UserService } from './../../services/user.service';
+import { AdminService } from './../../super-admin/services/admin.service';
+import { UserService } from './../../super-admin/services/user.service';
+import { GenerationTokenService } from './../../services/generation-token.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { GenerationTokenService } from './../../../services/generation-token.service';
-import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-info-personnel',
-  templateUrl: './info-personnel.component.html',
-  styleUrls: ['./info-personnel.component.scss']
+  selector: 'app-info-admin',
+  templateUrl: './info-admin.component.html',
+  styleUrls: ['./info-admin.component.scss']
 })
-export class InfoPersonnelComponent implements OnInit {
+export class InfoAdminComponent implements OnInit {
 
   hide=true;
   hidden = false
@@ -64,12 +64,12 @@ export class InfoPersonnelComponent implements OnInit {
     console.log(decodedToken)
     this.id = decodedToken.id
     console.log(this.id)
-    this.userService.afficherSuperAdmin(this.id).subscribe(
-      (result : any)=>{
+    this.userService.afficherAdmin(this.id).subscribe(
+      (result : any) => {
         this.data = result
         console.log(result)
       },
-      error=> console.log(error)
+      error => console.log(error)
     )
   }
 

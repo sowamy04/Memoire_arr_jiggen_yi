@@ -15,14 +15,18 @@ export class AvisService {
   }
 
   afficherAvis(id : any){
-    this.http.get(this.url+'simple_users/avis/'+id)
+    return this.http.get(this.url+'simple_users/avis/'+id)
   }
 
   modifierAvis(id : any, avis:any){
-    this.http.put(this.url+'simple_users/avis/'+id, avis)
+    return this.http.put(this.url+'simple_users/avis/'+id, avis)
   }
 
   deleteAvis(id: any){
-    this.http.delete(this.url+'simple_users/avis/'+id)
+    return this.http.delete(this.url+'simple_users/avis/'+id)
+  }
+
+  ajouterAvis(avis : any){
+    return this.http.post(this.url+'simple_users/avis', avis)
   }
 }

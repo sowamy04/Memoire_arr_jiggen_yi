@@ -57,11 +57,11 @@ export class StatisqtiquesComponent implements OnInit {
                 this.niveau=(this.vol * 15 + this.agression * 20 + this.vol * 15 + this.viol * 40 + this.transport * 10 ) / (this.x * 100)
                 this.d = {
                   id : this.id,
-                  vol : this.vol,
-                  viol : this.viol,
-                  agression : this.agression,
-                  transport : this.transport,
-                  eclairagePublique : this.eclairage,
+                  vol : this.vol / this.x,
+                  viol : this.viol / this.x,
+                  agression : this.agression / this.x,
+                  transport : this.transport / this.x,
+                  eclairagePublique : this.eclairage / this.x,
                   nomQuartier : this.quartier,
                   niveau : this.niveau
                  }

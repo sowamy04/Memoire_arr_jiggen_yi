@@ -26,6 +26,10 @@ export class UserService {
     return this.http.get(this.url+'super_admins/'+id)
   }
 
+  afficherAdmin(id : any){
+    return this.http.get(this.url+'super_admin/admins/'+id)
+  }
+
 
   /////////////////////////////////////////////////////////////////////
   ///////////////////////////////// Alertes ///////////////////////////

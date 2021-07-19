@@ -1,3 +1,5 @@
+import { UserService } from './../../super-admin/services/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { GenerationTokenService } from './../../services/generation-token.service';
@@ -10,40 +12,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlerteUserComponent implements OnInit {
 
-  alertes = [
-    {
-      id:'1',
-      meritoire:'anta',
-      date:'23/03/2020'
-    },
-    {
-      id:'1',
-      meritoire:'anta',
-      date:'23/03/2020'
-    },
-    {
-      id:'1',
-      meritoire:'anta',
-      date:'23/03/2020'
-    },
-    {
-      id:'1',
-      meritoire:'anta',
-      date:'23/03/2020'
-    },
-    {
-      id:'1',
-      meritoire:'anta',
-      date:'23/03/2020'
-    },
-    {
-      id:'1',
-      meritoire:'anta',
-      date:'23/03/2020'
-    }
-  ]
-  constructor( private auth: GenerationTokenService, private route : Router , private location : Location ) { }
+  alertes = []
+  tokenData : any
+  id : any
+  helper = new JwtHelperService()
+  data : any
+
+  constructor( private auth: GenerationTokenService, private route : Router , private location : Location,
+    private userService : UserService ) { }
 
   ngOnInit(): void {
+    this.getInfo()
   }
+
+  getInfo(){
+    this.tokenData = this.auth.RecuperationToken()
+    console.log(this.tokenData)
+    const decodedToken = this.helper.decodeToken( this.tokenData);
+    console.log(decodedToken)
+    this.id = decodedToken.id
+    console.log(this.id)
+    this.userService.afficherUser(this.id).subscribe(
+      (result : any)=>{
+        this.alertes = result.alertes
+        console.log(this.alertes)
+      },
+      error=> console.log(error)
+    )
+  }
+
+
 }

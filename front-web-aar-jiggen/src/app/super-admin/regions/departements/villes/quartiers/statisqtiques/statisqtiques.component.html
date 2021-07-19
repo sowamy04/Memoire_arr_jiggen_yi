@@ -1,4 +1,4 @@
-<p-table [value]="statistiques">
+<p-table [value]="statistiques" [paginator]="true" [rows]="5">
   <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
           Statistiques
@@ -29,7 +29,7 @@
           <td> {{stat.transport}} </td>
           <td> {{stat.niveau}} </td>
           <td>
-            <button pButton pRipple icon="pi pi-chart-bar" class="p-button-rounded p-button-primary p-mr-2"></button>
+            <button pButton pRipple icon="pi pi-chart-bar" class="p-button-rounded p-button-primary p-mr-2" [routerLink]="[stat.id+'/chart']"></button>
             <button pButton pRipple icon="pi pi-exclamation-triangle" class="p-button-rounded p-button-danger p-mr-2"></button>
           </td>
       </tr>
@@ -40,3 +40,8 @@
       </div>
   </ng-template>
 </p-table>
+
+
+<div class=" ml-5 mt-5 mr-5">
+  <router-outlet> </router-outlet>
+</div>
