@@ -62,6 +62,7 @@ import { MessageModule } from 'primeng/message';
 import { ChartsModule } from 'ng2-charts';
 import { FirstConnexionComponent } from './users/first-connexion/first-connexion.component';
 import { InfoAdminComponent } from './users/info-admin/info-admin.component';
+import { InfoUserComponent } from './utilisateur/info-user/info-user.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { InfoAdminComponent } from './users/info-admin/info-admin.component';
     DetailUserComponent,
     ChartComponent,
     FirstConnexionComponent,
-    InfoAdminComponent
+    InfoAdminComponent,
+    InfoUserComponent
   ],
   imports: [
     BrowserModule,

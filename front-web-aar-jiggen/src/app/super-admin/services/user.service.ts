@@ -18,13 +18,29 @@ export class UserService {
     return this.http.delete(this.url+'simple_users/'+id)
   }
 
+  modifierUtilisateur(id : any, user :any){
+    return this.http.post(this.url+'simple_users/'+id+'?_method=PUT', user)
+  }
+
+  ajouterUtilisateur(user : any){
+    return this.http.post(this.url+'simple_users', user)
+  }
+
   afficherUser(id : any){
     return this.http.get(this.url+'simple_users/'+id)
   }
 
+  ////////////////////////////////////////////
+  ////////////////////////////////////////////
+  ////////////////////////////////////////////
+
   afficherSuperAdmin(id : any){
     return this.http.get(this.url+'super_admins/'+id)
   }
+
+  ////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////
 
   afficherAdmin(id : any){
     return this.http.get(this.url+'super_admin/admins/'+id)

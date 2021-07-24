@@ -1,3 +1,4 @@
+import { InfoUserComponent } from './utilisateur/info-user/info-user.component';
 import { InfoAdminComponent } from './users/info-admin/info-admin.component';
 import { FirstConnexionComponent } from './users/first-connexion/first-connexion.component';
 import { ChartComponent } from './super-admin/regions/departements/villes/quartiers/statisqtiques/chart/chart.component';
@@ -145,7 +146,7 @@ const routes: Routes = [
     { path:'stats', component: StatsVillesComponent, children:[
       { path:':id/chart', component: ChartComponent}
     ] },
-    { path:'infos', component:InfoPersonnelComponent },
+    { path:'infos', component:InfoUserComponent },
   ] },
 
   { path:'not-found', component:NotFoundComponent },
