@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -7,6 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
+  options : any
   url = environment.apiUrl
   constructor( private http : HttpClient ) { }
 
@@ -30,17 +32,13 @@ export class UserService {
     return this.http.get(this.url+'simple_users/'+id)
   }
 
-  ////////////////////////////////////////////
-  ////////////////////////////////////////////
-  ////////////////////////////////////////////
+  // Super Admin Info
 
-  afficherSuperAdmin(id : any){
-    return this.http.get(this.url+'super_admins/'+id)
+  afficherSuperAdmin(id : any) : Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'super_admins/'+id)
   }
 
-  ////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////
+  // Admin Info
 
   afficherAdmin(id : any){
     return this.http.get(this.url+'super_admin/admins/'+id)

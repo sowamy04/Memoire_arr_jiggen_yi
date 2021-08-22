@@ -25,4 +25,5 @@ export class AdminService {
   modifierUser(id : any, user : any){
     return this.http.post(this.url+'super_admin/admins/'+id+'?_method=PUT', user)
   }
+
 }

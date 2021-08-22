@@ -17,10 +17,9 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *    "method": "GET",
  *   "path": "/super_admins/{id}",
  *   "normalization_context"={"groups":"super_admin:read"},
- *   "access_control"="(is_granted('ROLE_SUPER_ADMIN'))",
- *   "access_control_message"="Vous n'avez pas access à cette Ressource",
+ *   "security"="(is_granted('ROLE_SUPER_ADMIN'))",
  *   },
- * }
+ *  }
  * )
  */
 class SuperAdmin extends User

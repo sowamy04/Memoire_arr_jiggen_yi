@@ -16,8 +16,12 @@ export class InterceptorService implements HttpInterceptor {
       req = req.clone({
         headers: req.headers.set("Accept", 'application/json')
       });
+      //headers : req.headers.set("Access-Control-Allow-Origin","*")
+      req.headers.set('Access-Control-Allow-Origin', '*');
       return next.handle(req);
     }
+    //req.headers.set('Access-Control-Allow-Origin', '*');
     return next.handle(req);
   }
 }
+

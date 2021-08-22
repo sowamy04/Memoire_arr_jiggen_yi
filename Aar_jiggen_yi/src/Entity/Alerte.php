@@ -37,7 +37,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *   "normalization_context"={"groups":"alerte:read"},
  *   "access_control"="(is_granted('ROLE_USER'))",
  *   "access_control_message"="Vous n'avez pas access à cetteThe Ressource",
- *   "route_name"="ajouter_alerte",
+ *   "route_name"="add_alerte",
  * },
  * },
  * itemOperations= {

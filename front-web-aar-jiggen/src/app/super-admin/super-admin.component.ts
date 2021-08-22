@@ -11,7 +11,8 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-super-admin',
   templateUrl: './super-admin.component.html',
-  styleUrls: ['./super-admin.component.scss']
+  styleUrls: ['./super-admin.component.scss'],
+  providers : [UserService]
 })
 export class SuperAdminComponent implements OnInit {
 
@@ -38,9 +39,9 @@ export class SuperAdminComponent implements OnInit {
 
   getInfo(){
     this.tokenData = this.auth.RecuperationToken()
-    console.log(this.tokenData)
+    //console.log(this.tokenData)
     const decodedToken = this.helper.decodeToken( this.tokenData);
-    console.log(decodedToken)
+    //console.log(decodedToken)
     this.id = decodedToken.id
     console.log(this.id)
     this.userService.afficherSuperAdmin(this.id).subscribe(
@@ -48,7 +49,7 @@ export class SuperAdminComponent implements OnInit {
         this.data = result
         console.log(result)
       },
-      error=> console.log(error)
+      (error:any) => console.log(error)
     )
   }
 

@@ -61,7 +61,7 @@ export class InscriptionComponent implements OnInit {
     this.userService.ajouterUtilisateur(formData).subscribe(
       (resultat : any) => {
         console.log(resultat)
-        Swal.fire('Informations modifiées avec succès!', '', 'success')
+        Swal.fire('Inscription avec succès!', '', 'success')
         this.route.navigateByUrl('/connexion')
       },
       error => console.log('Erreur lors de la modification!', error)

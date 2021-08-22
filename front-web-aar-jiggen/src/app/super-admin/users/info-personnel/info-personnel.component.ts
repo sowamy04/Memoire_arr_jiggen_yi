@@ -69,7 +69,7 @@ export class InfoPersonnelComponent implements OnInit {
         this.data = result
         console.log(result)
       },
-      error=> console.log(error)
+      (error : any) => console.log(error)
     )
   }
 

@@ -9,15 +9,9 @@ export class GenerationTokenService {
 
   url = environment.apiUrl
   constructor(private http:HttpClient) { }
-  httpOption = {
-    headers: new HttpHeaders(
-      {
-        'Content-Type': 'application/json'
-      })
-  };
 
   getToken(credentials:any){
-    return  this.http.post(this.url+'login_check', credentials, this.httpOption);
+    return  this.http.post(this.url+'login_check', credentials);
   }
 
   RecuperationToken(){
